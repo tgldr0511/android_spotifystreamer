@@ -15,7 +15,7 @@ import java.util.List;
 import kaaes.spotify.webapi.android.models.Track;
 
 /**
- * Created by Yagami Zero on 6/27/2015.
+ * Adapter for the top 10 tracks
  */
 public class TopTracksAdapter extends ArrayAdapter<Track>{
     public TopTracksAdapter(Activity context, List<Track> tracks){
@@ -45,7 +45,7 @@ public class TopTracksAdapter extends ArrayAdapter<Track>{
         trackName.setText(track.name);
 
         TextView albumName = (TextView) rootView.findViewById(R.id.albumName);
-        trackName.setText(track.album.name);
+        albumName.setText(track.album.name);
 
         return rootView;
     }

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.IOError;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class MainActivityFragment extends Fragment {
     EditText searchQuery;
     ArtistSearchAdapter artistSearchAdapter;
     List<Artist> resultArtists;
-
+    ListView artistListView;
 
     public MainActivityFragment() {    }
 
@@ -42,16 +41,15 @@ public class MainActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
 
-        resultArtists = new ArrayList<Artist>();
+        resultArtists = new ArrayList<>();
         artistSearchAdapter = new ArtistSearchAdapter(
                 getActivity(),
                 resultArtists
         );
 
-        ListView artistListView = (ListView) rootView.findViewById(R.id.listview_artists);
+        artistListView = (ListView) rootView.findViewById(R.id.listview_artists);
 
         artistListView.setAdapter(artistSearchAdapter);
-
         artistListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -113,7 +111,8 @@ public class MainActivityFragment extends Fragment {
                     return null;
                 }
                 if (artistCount == 0) {
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.not_found, Toast.LENGTH_SHORT).show();
+                    // No artists found for the query
+                    artistSearchAdapter.clear();
                     return null;
                 }
 
